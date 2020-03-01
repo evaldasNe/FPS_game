@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerGunController : MonoBehaviour
 {
     float lookSensitivity = 1.5f;
     float smoothing = 1.5f;
+    float targetcount = 0;
 
     GameObject player;
     Vector2 smoothedVelocity;
@@ -24,6 +26,7 @@ public class PlayerGunController : MonoBehaviour
     {
         RotateGun();
         CheckForShooting();
+
     }
 
     private void RotateGun()
@@ -47,7 +50,18 @@ public class PlayerGunController : MonoBehaviour
             RaycastHit whatIHit;
             if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
             {
-                Debug.Log(whatIHit.collider.name);
+               Debug.Log(whatIHit.collider.name);
+                if(whatIHit.collider.name == "Shooting-wall")
+                {
+                    Destroy(whatIHit.transform.gameObject);
+
+                }
+                if (whatIHit.collider.name == "Target")
+                {
+                    targetcount++;
+                    Destroy(whatIHit.transform.gameObject);
+                    Debug.Log("Nušauti taikiniai: " + targetcount + "/5" );
+                }
             }
         }
     }
