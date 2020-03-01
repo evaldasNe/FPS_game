@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerGunController : MonoBehaviour
 {
     float lookSensitivity = 1.5f;
     float smoothing = 1.5f;
-    float targetcount = 0;
+    int targetcount;
+    private TextMeshProUGUI m_Text;
 
     GameObject player;
     Vector2 smoothedVelocity;
@@ -19,6 +21,9 @@ public class PlayerGunController : MonoBehaviour
         player = transform.parent.gameObject;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        m_Text = GameObject.Find("Counter (TMP)").GetComponent<TextMeshProUGUI>();
+        targetcount = 0;
+        m_Text.text = "0 / 5";
     }
 
     // Update is called once per frame
@@ -26,7 +31,6 @@ public class PlayerGunController : MonoBehaviour
     {
         RotateGun();
         CheckForShooting();
-
     }
 
     private void RotateGun()
@@ -50,7 +54,7 @@ public class PlayerGunController : MonoBehaviour
             RaycastHit whatIHit;
             if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
             {
-               Debug.Log(whatIHit.collider.name);
+                Debug.Log(whatIHit.collider.name);
                 if(whatIHit.collider.name == "Shooting-wall")
                 {
                     Destroy(whatIHit.transform.gameObject);
@@ -61,8 +65,14 @@ public class PlayerGunController : MonoBehaviour
                     targetcount++;
                     Destroy(whatIHit.transform.gameObject);
                     Debug.Log("Nušauti taikiniai: " + targetcount + "/5" );
+                    IncreaseCounter(targetcount);
                 }
             }
         }
+    }
+
+    void IncreaseCounter(int count)
+    {
+        m_Text.text = count.ToString() + " / 5";
     }
 }
