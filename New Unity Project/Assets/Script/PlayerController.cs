@@ -10,6 +10,15 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody m_Rigidbody;
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        string hitWhat = collision.gameObject.tag;
+        if (hitWhat == "Enemy")
+        {
+            FindObjectOfType<GameManager>().Restart();
+        }
+    }
+
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody>();

@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3804827829621083426}
   - component: {fileID: 3804827829621083427}
   - component: {fileID: 3804827829621083436}
-  - component: {fileID: 3804827829621083437}
+  - component: {fileID: 3996200552395446907}
+  - component: {fileID: 8813399913002642882}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -296,8 +297,24 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!64 &3804827829621083437
-MeshCollider:
+--- !u!54 &3996200552395446907
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3804827829621083438}
+  serializedVersion: 2
+  m_Mass: 0.5
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &8813399913002642882
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -306,7 +323,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 2, y: 4, z: 2}
+  m_Center: {x: 1, y: 2, z: -1}
