@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerGunController : MonoBehaviour
 {
     float lookSensitivity = 1.5f;
     float smoothing = 1.5f;
-    int targetcount;
+    int killCount;
+    int enemysCount;
     private TextMeshProUGUI m_Text;
 
     GameObject player;
@@ -22,8 +24,10 @@ public class PlayerGunController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         m_Text = GameObject.Find("Counter (TMP)").GetComponent<TextMeshProUGUI>();
-        targetcount = 0;
-        m_Text.text = "0 / 5";
+        enemysCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
+        killCount = 0;
+        m_Text.text = "0 / " + enemysCount;
     }
 
     // Update is called once per frame
@@ -54,18 +58,29 @@ public class PlayerGunController : MonoBehaviour
             RaycastHit whatIHit;
             if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
             {
-                Debug.Log(whatIHit.collider.name);
-                if(whatIHit.collider.name == "Shooting-wall")
+                string shotObjectName = whatIHit.collider.name;
+                Debug.Log(shotObjectName);
+                
+                if(shotObjectName == "Shooting-wall")
                 {
                     Destroy(whatIHit.transform.gameObject);
 
                 }
-                if (whatIHit.collider.name == "Target")
+                if (shotObjectName == "Target")
                 {
-                    targetcount++;
+                    killCount++;
                     Destroy(whatIHit.transform.gameObject);
-                    Debug.Log("Nušauti taikiniai: " + targetcount + "/5" );
-                    IncreaseCounter(targetcount);
+                    IncreaseCounter(killCount);
+                    if (killCount == enemysCount)
+                    {
+                        SceneManager.LoadScene("Level1");
+                    }
+                } 
+                else if(shotObjectName.Contains("Enemy"))
+                {
+                    killCount++;
+                    Destroy(whatIHit.transform.gameObject);
+                    IncreaseCounter(killCount);
                 }
             }
         }
@@ -73,6 +88,6 @@ public class PlayerGunController : MonoBehaviour
 
     void IncreaseCounter(int count)
     {
-        m_Text.text = count.ToString() + " / 5";
+        m_Text.text = count.ToString() + " / " + enemysCount;
     }
 }
