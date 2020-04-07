@@ -13,6 +13,12 @@ public class PlayerGunController : MonoBehaviour
     int enemysCount;
     private TextMeshProUGUI m_Text;
 
+    int damage = 25;
+    float impactForce = 35f;
+    float fireRate = 15f;
+    float nextTimeToFire = 0f;
+
+    ParticleSystem muzzleFlash;
     GameObject player;
     Vector2 smoothedVelocity;
     Vector2 currentLokingPos;
@@ -20,6 +26,7 @@ public class PlayerGunController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        muzzleFlash = transform.GetComponentInChildren<ParticleSystem>();
         player = transform.parent.gameObject;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -53,8 +60,10 @@ public class PlayerGunController : MonoBehaviour
 
     private void CheckForShooting()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && Time.time >= nextTimeToFire)
         {
+            muzzleFlash.Play();
+
             RaycastHit whatIHit;
             if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
             {
@@ -78,10 +87,21 @@ public class PlayerGunController : MonoBehaviour
                 } 
                 else if(shotObjectName.Contains("Enemy"))
                 {
-                    killCount++;
-                    Destroy(whatIHit.transform.gameObject);
-                    IncreaseCounter(killCount);
+                    
+                    if (whatIHit.rigidbody != null)
+                    {
+                        whatIHit.rigidbody.AddForce(-whatIHit.normal * impactForce);
+                    }
+                    
+                    // true when object dies, else false
+                    if (whatIHit.transform.GetComponent<EnemyScript>().TakeDamage(damage))
+                    {
+                        killCount++;
+                        IncreaseCounter(killCount);
+                    }
                 }
+
+                nextTimeToFire = Time.time + 1f / fireRate;
             }
         }
     }
