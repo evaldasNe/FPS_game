@@ -23,6 +23,8 @@ public class PlayerGunController : MonoBehaviour
     Vector2 smoothedVelocity;
     Vector2 currentLokingPos;
 
+    AudioSource shootingAudio;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,8 @@ public class PlayerGunController : MonoBehaviour
 
         killCount = 0;
         m_Text.text = "0 / " + enemysCount;
+
+        shootingAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -63,6 +67,7 @@ public class PlayerGunController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && Time.time >= nextTimeToFire)
         {
             muzzleFlash.Play();
+            shootingAudio.Play();
 
             RaycastHit whatIHit;
             if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
