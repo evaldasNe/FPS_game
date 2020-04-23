@@ -7,6 +7,7 @@ TagManager:
   - Shootable
   - Water
   - Floor
+  - Door
   - Enemy
   - LightningBolt
   layers:
@@ -21,6 +22,7 @@ TagManager:
   - Lighting
   - Ground
   - Postprocessing
+  - Trigger
   - 
   - 
   - 
