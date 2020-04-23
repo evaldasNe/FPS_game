@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    float delayTime = 1f;
+    float delayTime = 0f;
 
     public void Restart()
     {
