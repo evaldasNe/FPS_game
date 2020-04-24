@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-
-public class PlayerGunController : MonoBehaviour
+public class PlayerGunScriptAK : MonoBehaviour
 {
+
     float lookSensitivity = 1.5f;
     float smoothing = 1.5f;
     int killCount;
@@ -18,8 +18,8 @@ public class PlayerGunController : MonoBehaviour
     float fireRate = 15f;
     float nextTimeToFire = 0f;
 
-    Animator anim;
     ParticleSystem muzzleFlash;
+    Animator anim;
     GameObject player;
     Vector2 smoothedVelocity;
     Vector2 currentLokingPos;
@@ -49,7 +49,7 @@ public class PlayerGunController : MonoBehaviour
         RotateGun();
         CheckForShooting();
     }
-     void FixedUpdate()
+    private void FixedUpdate()
     {
         AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
         if (info.IsName("Fire")) anim.SetBool("Fire", false);
@@ -75,15 +75,14 @@ public class PlayerGunController : MonoBehaviour
         {
             muzzleFlash.Play();
             shootingAudio.Play();
-            anim.CrossFadeInFixedTime("Fire", 0.1f);
-
+            anim.SetBool("Fire", true);
             RaycastHit whatIHit;
-            if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
+            if (Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
             {
                 string shotObjectName = whatIHit.collider.name;
                 Debug.Log(shotObjectName);
-                
-                if(shotObjectName == "Shooting-wall")
+
+                if (shotObjectName == "Shooting-wall")
                 {
                     Destroy(whatIHit.transform.gameObject);
 
@@ -97,15 +96,15 @@ public class PlayerGunController : MonoBehaviour
                     {
                         SceneManager.LoadScene("Level1");
                     }
-                } 
-                else if(shotObjectName.Contains("Enemy"))
+                }
+                else if (shotObjectName.Contains("Enemy"))
                 {
-                    
+
                     if (whatIHit.rigidbody != null)
                     {
                         whatIHit.rigidbody.AddForce(-whatIHit.normal * impactForce);
                     }
-                    
+
                     // true when object dies, else false
                     if (whatIHit.transform.GetComponent<EnemyScript>().TakeDamage(damage))
                     {
@@ -124,3 +123,4 @@ public class PlayerGunController : MonoBehaviour
         m_Text.text = count.ToString() + " / " + enemysCount;
     }
 }
+
