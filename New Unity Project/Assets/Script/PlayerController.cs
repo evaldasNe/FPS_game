@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -33,6 +34,13 @@ public class PlayerController : MonoBehaviour
         if (hitWhat == "Enemy")
         {
             FindObjectOfType<GameManager>().Restart();
+        }
+        if (hitWhat == "Finish")
+        {
+           if (GetComponentInChildren<PlayerGunController>().IsAllEnemysKilled())
+           {
+                SceneManager.LoadScene("Level2");
+           }
         }
     }
 

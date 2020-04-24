@@ -116,4 +116,10 @@ public class PlayerGunController : MonoBehaviour
     {
         m_Text.text = count.ToString() + " / " + enemysCount;
     }
+
+    public bool IsAllEnemysKilled()
+    {
+        return killCount == enemysCount;
+    }
+
 }
