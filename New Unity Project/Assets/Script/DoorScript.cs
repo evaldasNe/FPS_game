@@ -13,5 +13,6 @@ public class DoorScript : MonoBehaviour
     {
         Animator anim = GetComponent<Animator>();
         anim.SetTrigger("OpenClose");
+        GetComponent<AudioSource>().Play();
     }
 }
