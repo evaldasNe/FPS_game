@@ -7,24 +7,32 @@ public class PlayerController : MonoBehaviour
     public float speed = 10f;
     public float jumpForce = 10f;
     public float distToGround;
-    int collisionWithWaterCount = 0;
 
     Rigidbody m_Rigidbody;
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        string hitWhat = collision.gameObject.tag;
-        if (hitWhat == "Enemy" || hitWhat == "LightningBolt")
-        {
-            FindObjectOfType<GameManager>().Restart();
-        }
+        string hitWhat = other.gameObject.tag;
         if (hitWhat == "Water")
         {
             speed = 5f;
-        } 
-        else if (hitWhat == "Floor")
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        string hitWhat = other.gameObject.tag;
+        if (hitWhat == "Water")
         {
             speed = 10f;
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        string hitWhat = collision.gameObject.tag;
+        if (hitWhat == "Enemy")
+        {
+            FindObjectOfType<GameManager>().Restart();
         }
     }
 

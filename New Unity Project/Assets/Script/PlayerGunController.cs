@@ -18,7 +18,6 @@ public class PlayerGunController : MonoBehaviour
     float fireRate = 15f;
     float nextTimeToFire = 0f;
 
-    Animator anim;
     ParticleSystem muzzleFlash;
     GameObject player;
     Vector2 smoothedVelocity;
@@ -29,7 +28,6 @@ public class PlayerGunController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
         muzzleFlash = transform.GetComponentInChildren<ParticleSystem>();
         player = transform.parent.gameObject;
         Cursor.lockState = CursorLockMode.Locked;
@@ -48,11 +46,6 @@ public class PlayerGunController : MonoBehaviour
     {
         RotateGun();
         CheckForShooting();
-    }
-     void FixedUpdate()
-    {
-        AnimatorStateInfo info = anim.GetCurrentAnimatorStateInfo(0);
-        if (info.IsName("Fire")) anim.SetBool("Fire", false);
     }
 
     private void RotateGun()
@@ -75,7 +68,7 @@ public class PlayerGunController : MonoBehaviour
         {
             muzzleFlash.Play();
             shootingAudio.Play();
-            anim.CrossFadeInFixedTime("Fire", 0.1f);
+            GetComponent<Animator>().SetTrigger("Shoot");
 
             RaycastHit whatIHit;
             if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
