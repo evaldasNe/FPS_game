@@ -2581,7 +2581,7 @@ GameObject:
   - component: {fileID: 248299045}
   - component: {fileID: 248299044}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: FinishPlane
   m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2654,12 +2654,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248299043}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.88, y: 1.1, z: -16.33}
   m_LocalScale: {x: 0.9, y: 1, z: 1.3}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 876346687}
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &249447153
 GameObject:
@@ -9810,6 +9810,7 @@ Transform:
   - {fileID: 1334706736}
   - {fileID: 1498807326}
   - {fileID: 1197577795}
+  - {fileID: 248299047}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -28613,6 +28614,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 962865740}
     m_Modifications:
+    - target: {fileID: 6128978624553763484, guid: 81bbebdce297f514c8287b8b3e409511,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.x
+      value: 7.6e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128978624553763484, guid: 81bbebdce297f514c8287b8b3e409511,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.y
+      value: 0.0000000414407
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128978624553763484, guid: 81bbebdce297f514c8287b8b3e409511,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.z
+      value: 7.6e-43
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128978624553763484, guid: 81bbebdce297f514c8287b8b3e409511,
+        type: 3}
+      propertyPath: m_BoundingSphereOverride.w
+      value: 6.017807
+      objectReference: {fileID: 0}
     - target: {fileID: 6128978625148779120, guid: 81bbebdce297f514c8287b8b3e409511,
         type: 3}
       propertyPath: m_Name
