@@ -47,7 +47,6 @@ public class PlayerGunController : MonoBehaviour
         RotateGun();
         CheckForShooting();
     }
-   
 
     private void RotateGun()
     {
@@ -69,6 +68,7 @@ public class PlayerGunController : MonoBehaviour
         {
             muzzleFlash.Play();
             shootingAudio.Play();
+            GetComponent<Animator>().SetTrigger("Shoot");
 
             RaycastHit whatIHit;
             if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))

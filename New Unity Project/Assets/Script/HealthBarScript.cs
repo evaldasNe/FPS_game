@@ -14,6 +14,7 @@ public class HealthBarScript : MonoBehaviour
 
     public void SetMaxHealth(int health)
     {
+        slider = transform.GetComponent<Slider>();
         slider.maxValue = health;
         slider.value = health;
     }

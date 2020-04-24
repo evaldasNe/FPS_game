@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    int health = 100;
+    int health;
 
     HealthBarScript healthBar;
 
     private void Start()
     {
+        health = 100;
         healthBar = transform.GetComponentInChildren<HealthBarScript>();
         healthBar.SetMaxHealth(health);
     }
