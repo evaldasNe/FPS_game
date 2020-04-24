@@ -11,9 +11,7 @@ public class DoorScript : MonoBehaviour
 
     private void OpenDoors()
     {
-        var transform = GetComponent<Transform>();
-        Vector3 v = new Vector3(transform.localEulerAngles.x, 90, transform.localEulerAngles.z);
-        transform.localEulerAngles = v;
-        
+        Animator anim = GetComponent<Animator>();
+        anim.SetTrigger("OpenClose");
     }
 }
