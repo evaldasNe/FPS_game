@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.XR;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,6 +12,7 @@ public class EnemyScript : MonoBehaviour
     Transform target;
     NavMeshAgent agent;
     HealthBarScript healthBar;
+    Animator animator;
 
     private void Start()
     {
@@ -20,36 +22,52 @@ public class EnemyScript : MonoBehaviour
 
         target = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         float distance = Vector3.Distance(target.position, transform.position);
+
         if (distance <= lookRadius)
         {
+            animator.SetBool("isWalking", true);
             agent.SetDestination(target.position);
+        }
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isAttacking", true);
+        }
+        else
+        {
+            animator.SetBool("isAttacking", false);
+        }
+
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Dead"))
+        {
+            Die();
         }
     }
 
     /// <summary>
-    /// Take damage from shooting
+    /// Enemy takes damage
     /// </summary>
-    /// <param name="damage">The amount of damage</param>
-    /// <returns>If object dies returns true, else false</returns>
-    public bool TakeDamage(int damage)
+    /// <param name="damage">damage amount</param>
+    public void TakeDamage(int damage)
     {
         health -= damage;
         healthBar.SetHealth(health);
         if (health <= 0f)
         {
-            Die();
-            return true;
+            animator.SetBool("isFallingBack", true);
         }
-        return false;
     }
 
     void Die()
     {
+        target.GetComponentInChildren<PlayerGunController>().IncreaseCounter();
         Destroy(gameObject);
     }
 }

@@ -31,10 +31,6 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         string hitWhat = collision.gameObject.tag;
-        if (hitWhat == "Enemy")
-        {
-            FindObjectOfType<GameManager>().Restart();
-        }
         if (hitWhat == "Finish")
         {
            if (GetComponentInChildren<PlayerGunController>().IsAllEnemysKilled())

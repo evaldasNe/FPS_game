@@ -12,6 +12,8 @@ public class PlayerGunController : MonoBehaviour
     int killCount;
     int enemysCount;
     private TextMeshProUGUI m_Text;
+    private TextMeshProUGUI playerHealthText;
+    private int health = 100;
 
     int damage = 25;
     float impactForce = 35f;
@@ -33,10 +35,12 @@ public class PlayerGunController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         m_Text = GameObject.Find("Counter (TMP)").GetComponent<TextMeshProUGUI>();
+        playerHealthText = GameObject.Find("PlayerHealth").GetComponent<TextMeshProUGUI>();
         enemysCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
 
         killCount = 0;
         m_Text.text = "0 / " + enemysCount;
+        playerHealthText.text = health.ToString();
 
         shootingAudio = GetComponent<AudioSource>();
     }
@@ -74,6 +78,7 @@ public class PlayerGunController : MonoBehaviour
             if(Physics.Raycast(transform.position, transform.forward, out whatIHit, Mathf.Infinity))
             {
                 string shotObjectName = whatIHit.collider.name;
+                string objectTag = whatIHit.collider.tag;
                 Debug.Log(shotObjectName);
                 
                 if(shotObjectName == "Shooting-wall")
@@ -83,28 +88,22 @@ public class PlayerGunController : MonoBehaviour
                 }
                 if (shotObjectName == "Target")
                 {
-                    killCount++;
                     Destroy(whatIHit.transform.gameObject);
-                    IncreaseCounter(killCount);
+                    IncreaseCounter();
                     if (killCount == enemysCount)
                     {
                         SceneManager.LoadScene("Level1");
                     }
                 } 
-                else if(shotObjectName.Contains("Enemy"))
+                else if(objectTag == "Enemy")
                 {
                     
                     if (whatIHit.rigidbody != null)
                     {
                         whatIHit.rigidbody.AddForce(-whatIHit.normal * impactForce);
                     }
-                    
-                    // true when object dies, else false
-                    if (whatIHit.transform.GetComponent<EnemyScript>().TakeDamage(damage))
-                    {
-                        killCount++;
-                        IncreaseCounter(killCount);
-                    }
+
+                    whatIHit.transform.GetComponent<EnemyScript>().TakeDamage(damage);
                 }
 
                 nextTimeToFire = Time.time + 1f / fireRate;
@@ -112,14 +111,21 @@ public class PlayerGunController : MonoBehaviour
         }
     }
 
-    void IncreaseCounter(int count)
+    public void IncreaseCounter()
     {
-        m_Text.text = count.ToString() + " / " + enemysCount;
+        killCount++;
+        m_Text.text = killCount.ToString() + " / " + enemysCount;
     }
 
     public bool IsAllEnemysKilled()
     {
         return killCount == enemysCount;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        playerHealthText.text = health.ToString();
     }
 
 }
