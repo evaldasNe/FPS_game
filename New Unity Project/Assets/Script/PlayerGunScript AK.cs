@@ -89,9 +89,8 @@ public class PlayerGunScriptAK : MonoBehaviour
                 }
                 if (shotObjectName == "Target")
                 {
-                    killCount++;
                     Destroy(whatIHit.transform.gameObject);
-                    IncreaseCounter(killCount);
+                    IncreaseCounter();
                     if (killCount == enemysCount)
                     {
                         SceneManager.LoadScene("Level1");
@@ -106,11 +105,7 @@ public class PlayerGunScriptAK : MonoBehaviour
                     }
 
                     // true when object dies, else false
-                    if (whatIHit.transform.GetComponent<EnemyScript>().TakeDamage(damage))
-                    {
-                        killCount++;
-                        IncreaseCounter(killCount);
-                    }
+                    whatIHit.transform.GetComponent<EnemyScript>().TakeDamage(damage);
                 }
 
                 nextTimeToFire = Time.time + 1f / fireRate;
@@ -118,9 +113,10 @@ public class PlayerGunScriptAK : MonoBehaviour
         }
     }
 
-    void IncreaseCounter(int count)
+    public void IncreaseCounter()
     {
-        m_Text.text = count.ToString() + " / " + enemysCount;
+        killCount++;
+        m_Text.text = killCount.ToString() + " / " + enemysCount;
     }
 }
 
