@@ -9,6 +9,8 @@ using System.Linq;
 
 public class PlayerGunController : MonoBehaviour
 {
+    public float MaxUp = 45;
+    public float MaxDown = -60;
     float lookSensitivity = 1.5f;
     float smoothing = 1.5f;
     int killCount;
@@ -60,12 +62,13 @@ public class PlayerGunController : MonoBehaviour
     private void RotateGun()
     {
         Vector2 inputValues = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
-
         inputValues = Vector2.Scale(inputValues, new Vector2(lookSensitivity * smoothing, lookSensitivity * smoothing));
         smoothedVelocity.x = Mathf.Lerp(smoothedVelocity.x, inputValues.x, 1f / smoothing);
         smoothedVelocity.y = Mathf.Lerp(smoothedVelocity.y, inputValues.y, 1f / smoothing);
 
+
         currentLokingPos += smoothedVelocity;
+        currentLokingPos.y= Mathf.Clamp(currentLokingPos.y, MaxDown, MaxUp);
 
         transform.localRotation = Quaternion.AngleAxis(-currentLokingPos.y, Vector3.right);
         player.transform.localRotation = Quaternion.AngleAxis(currentLokingPos.x, player.transform.up);
