@@ -29,7 +29,7 @@ public class EnemyScript : MonoBehaviour
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
-        if (distance <= lookRadius)
+        if (distance <= lookRadius || health < 100)
         {
             animator.SetBool("isWalking", true);
             agent.SetDestination(target.position);

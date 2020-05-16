@@ -44,7 +44,7 @@ public class SpiderScript : MonoBehaviour
         }
         else
         {
-            if (distance <= lookRadius)
+            if (distance <= lookRadius || health < 100)
             {
                 if (!anim.IsPlaying("attack2"))
                 {

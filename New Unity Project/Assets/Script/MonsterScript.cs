@@ -29,7 +29,7 @@ public class MonsterScript : MonoBehaviour
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
-        if (distance <= lookRadius)
+        if (distance <= lookRadius || health < 100)
         {
             animator.SetTrigger("IsRunning");
             agent.SetDestination(target.position);
