@@ -101,7 +101,11 @@ public class PlayerGunController : MonoBehaviour
                 }
                 else if (objectTag == "Spider")
                 {
-                    whatIHit.transform.GetComponent<SpiderScript>().TakeDamage(damage*2);
+                    whatIHit.transform.GetComponent<SpiderScript>().TakeDamage(damage * 2);
+                }
+                else if (objectTag == "Monster")
+                {
+                    whatIHit.transform.GetComponent<MonsterScript>().TakeDamage(damage / 2);
                 }
 
                 nextTimeToFire = Time.time + 1f / fireRate;
