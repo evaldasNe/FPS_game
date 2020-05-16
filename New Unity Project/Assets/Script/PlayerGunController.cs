@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using System.IO;
+using System;
+using System.Linq;
 
 public class PlayerGunController : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class PlayerGunController : MonoBehaviour
     float lookSensitivity = 1.5f;
     float smoothing = 1.5f;
     int killCount;
-    int enemysCount;
+    int enemysCount = 0;
     private TextMeshProUGUI m_Text;
     private TextMeshProUGUI playerHealthText;
     private int health = 100;
@@ -39,7 +40,10 @@ public class PlayerGunController : MonoBehaviour
         Cursor.visible = false;
         m_Text = GameObject.Find("Counter (TMP)").GetComponent<TextMeshProUGUI>();
         playerHealthText = GameObject.Find("PlayerHealth").GetComponent<TextMeshProUGUI>();
-        enemysCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
+        enemysCount += GameObject.FindGameObjectsWithTag("Enemy").Length;
+        enemysCount += GameObject.FindGameObjectsWithTag("Spider").Length;
+        enemysCount += GameObject.FindGameObjectsWithTag("Monster").Length;
 
         killCount = 0;
         m_Text.text = "0 / " + enemysCount;
@@ -101,13 +105,15 @@ public class PlayerGunController : MonoBehaviour
                 } 
                 else if(objectTag == "Enemy")
                 {
-                    
-                    if (whatIHit.rigidbody != null)
-                    {
-                        whatIHit.rigidbody.AddForce(-whatIHit.normal * impactForce);
-                    }
-
                     whatIHit.transform.GetComponent<EnemyScript>().TakeDamage(damage);
+                }
+                else if (objectTag == "Spider")
+                {
+                    whatIHit.transform.GetComponent<SpiderScript>().TakeDamage(damage * 2);
+                }
+                else if (objectTag == "Monster")
+                {
+                    whatIHit.transform.GetComponent<MonsterScript>().TakeDamage(damage / 2);
                 }
 
                 nextTimeToFire = Time.time + 1f / fireRate;

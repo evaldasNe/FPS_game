@@ -10,6 +10,8 @@ TagManager:
   - Door
   - Enemy
   - LightningBolt
+  - Spider
+  - Monster
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,6 @@ TagManager:
   - Ground
   - Postprocessing
   - Trigger
-  - 
   - 
   - 
   - 
