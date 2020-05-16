@@ -34,8 +34,7 @@ public class EnemyScript : MonoBehaviour
             animator.SetBool("isWalking", true);
             agent.SetDestination(target.position);
         }
-
-        if (agent.remainingDistance <= agent.stoppingDistance)
+        if (distance <= agent.stoppingDistance + agent.radius)
         {
             animator.SetBool("isWalking", false);
             animator.SetBool("isAttacking", true);
