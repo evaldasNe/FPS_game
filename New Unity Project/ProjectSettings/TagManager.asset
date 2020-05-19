@@ -4,14 +4,17 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Shootable
-  - Water
-  - Floor
-  - Door
-  - Enemy
-  - LightningBolt
-  - Spider
-  - Monster
+  - Item
+  - Target
+  - Wood
+  - Concrete
+  - Dirt
+  - Fire
+  - Metal
+  - Crosshair
+  - NPC
+  - Flesh
+  - Cover
   layers:
   - Default
   - TransparentFX
@@ -21,10 +24,6 @@ TagManager:
   - UI
   - 
   - 
-  - Lighting
-  - Ground
-  - Postprocessing
-  - Trigger
   - 
   - 
   - 
@@ -36,6 +35,10 @@ TagManager:
   - 
   - 
   - 
+  - 
+  - Weapon
+  - Player
+  - NPC
   - 
   - 
   - 
@@ -46,9 +49,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Fire
-    uniqueID: 3804908061
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

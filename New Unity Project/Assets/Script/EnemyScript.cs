@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
-    int health;
+    public int health;
     float lookRadius = 20f;
 
     Transform target;
