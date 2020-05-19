@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DarkTreeFPS;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,8 +9,15 @@ public class MonsterAttackScript : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        PlayerGunController playerScript = GameObject.Find("Player").transform.GetComponentInChildren<PlayerGunController>();
-        playerScript.TakeDamage(damage);
+        if (GameObject.Find("Player").GetComponent<PlayerStats>())
+        {
+            GameObject.Find("Player").GetComponent<PlayerStats>().ApplyDamage(1);
+        }
+        else
+        {
+            PlayerGunController playerScript = GameObject.Find("Player").transform.GetComponentInChildren<PlayerGunController>();
+            playerScript.TakeDamage(damage);
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

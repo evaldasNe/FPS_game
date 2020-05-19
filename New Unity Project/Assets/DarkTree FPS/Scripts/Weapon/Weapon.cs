@@ -454,6 +454,15 @@ namespace DarkTreeFPS
             if (hit.collider.GetComponent<ObjectHealth>())
                 hit.collider.GetComponent<ObjectHealth>().health -= calculatedDamage;
 
+            if (hit.collider.GetComponent<MonsterScript>())
+                hit.collider.GetComponent<MonsterScript>().TakeDamage(calculatedDamage);
+
+            if (hit.collider.GetComponent<EnemyScript>())
+                hit.collider.GetComponent<EnemyScript>().TakeDamage(calculatedDamage);
+
+            if (hit.collider.GetComponent<SpiderScript>())
+                hit.collider.GetComponent<SpiderScript>().TakeDamage(calculatedDamage);
+
             if (!hit.rigidbody)
             {
                 //Set hit position to decal manager
