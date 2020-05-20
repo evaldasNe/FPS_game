@@ -55,8 +55,14 @@ namespace DarkTreeFPS
 
         InputManager inputManager;
 
+        GameObject shop;
+        bool isShopActive = false;
+
         private void Start()
         {
+            shop = GameObject.FindGameObjectWithTag("Shop");
+            shop.SetActive(false);
+
             controllerRigidbody = GetComponent<Rigidbody>();
             controllerCollider = GetComponent<CapsuleCollider>();
 
@@ -69,6 +75,22 @@ namespace DarkTreeFPS
 
         private void Update()
         {
+            var dis = Vector3.Distance(gameObject.transform.position, GameObject.Find("Cabin1_DM").transform.position);
+
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+                if (isShopActive)
+                {
+                    shop.SetActive(false);
+                    isShopActive = false;
+                }
+                else if (dis <= 6)
+                {
+                    shop.SetActive(true);
+                    isShopActive = true;
+                }
+            }
+
             if (mouseLookEnabled && !InventoryManager.showInventory)
                 MouseLook();
             
