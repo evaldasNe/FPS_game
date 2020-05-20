@@ -65,7 +65,9 @@ public class MonsterScript : MonoBehaviour
 
     void Die()
     {
-        target.GetComponentInChildren<PlayerGunController>().IncreaseCounter();
+        if (target.GetComponentInChildren<PlayerGunController>())
+            target.GetComponentInChildren<PlayerGunController>().IncreaseCounter();
+
         Destroy(gameObject);
     }
 }

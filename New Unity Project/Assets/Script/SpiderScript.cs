@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DarkTreeFPS;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro.Examples;
@@ -57,12 +58,26 @@ public class SpiderScript : MonoBehaviour
                 anim.Play("attack2");
                 if (attackTime == null)
                 {
-                    target.GetComponentInChildren<PlayerGunController>().TakeDamage(damage);
+                    if (GameObject.Find("Player").GetComponent<PlayerStats>())
+                    {
+                        GameObject.Find("Player").GetComponent<PlayerStats>().ApplyDamage(damage);
+                    }
+                    else
+                    {
+                        target.GetComponentInChildren<PlayerGunController>().TakeDamage(damage);
+                    }
                     attackTime = DateTime.Now;
                 } 
                 else if ((DateTime.Now - attackTime).TotalSeconds >= anim["attack2"].length)
                 {
-                    target.GetComponentInChildren<PlayerGunController>().TakeDamage(damage);
+                    if (GameObject.Find("Player").GetComponent<PlayerStats>())
+                    {
+                        GameObject.Find("Player").GetComponent<PlayerStats>().ApplyDamage(damage);
+                    }
+                    else
+                    {
+                        target.GetComponentInChildren<PlayerGunController>().TakeDamage(damage);
+                    }
                     attackTime = DateTime.Now;
                 }
             }
@@ -89,7 +104,9 @@ public class SpiderScript : MonoBehaviour
 
     void Die()
     {
-        target.GetComponentInChildren<PlayerGunController>().IncreaseCounter();
+        if (target.GetComponentInChildren<PlayerGunController>())
+            target.GetComponentInChildren<PlayerGunController>().IncreaseCounter();
+
         Destroy(gameObject);
     }
 }
