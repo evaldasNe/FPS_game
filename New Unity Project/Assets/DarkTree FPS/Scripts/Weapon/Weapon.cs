@@ -238,6 +238,7 @@ namespace DarkTreeFPS
             normalFOV = cam.fieldOfView;
 
             weaponManager = FindObjectOfType<WeaponManager>();
+            weaponManager.EquipWeapon("Glock", gameObject);
 
             scope = weaponManager.scopeImage;
             ammoText = GameObject.Find("AmmoText").GetComponent<Text>();

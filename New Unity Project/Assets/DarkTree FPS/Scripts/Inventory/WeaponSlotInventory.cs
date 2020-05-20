@@ -22,6 +22,7 @@ namespace DarkTreeFPS
         {
             image = GetComponent<Image>();
             weaponManager = FindObjectOfType<WeaponManager>();
+            
         }
         
         void Update()
