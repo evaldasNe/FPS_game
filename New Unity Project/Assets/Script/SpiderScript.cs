@@ -15,7 +15,8 @@ public class SpiderScript : MonoBehaviour
     DateTime attackTime;
     int damage = 1;
 
-    Transform target;
+    public Transform target;
+    public EnemySpawner es;
     NavMeshAgent agent;
     HealthBarScript healthBar;
     Animation anim;
@@ -35,9 +36,9 @@ public class SpiderScript : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(target.position, transform.position);
-
         if (isDead)
         {
+
             if ((DateTime.Now - deathTime).TotalSeconds >= anim["death2"].length)
             {
                 Die();
@@ -104,9 +105,7 @@ public class SpiderScript : MonoBehaviour
 
     void Die()
     {
-        if (target.GetComponentInChildren<PlayerGunController>())
-            target.GetComponentInChildren<PlayerGunController>().IncreaseCounter();
-
         Destroy(gameObject);
+        es.EnemyEliminated();
     }
 }
