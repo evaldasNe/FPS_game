@@ -132,19 +132,9 @@ namespace DarkTreeFPS
                     lockCursor = false;
                     mouseLookEnabled = false;
                     Time.timeScale = 0;
-
-                    if (isShopActive)
-                    {
-                        shop.SetActive(false);
-                        isShopActive = false;
-                    }
-                    else if (dis <= 6 && spawnerscript.waitingForWave == true)
-                    {
-                        shop.SetActive(true);
-                        isShopActive = true;
-                    }
                 }
             }
+            
 
             if (mouseLookEnabled && !InventoryManager.showInventory)
                 MouseLook();

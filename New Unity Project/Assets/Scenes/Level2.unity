@@ -782,7 +782,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: 'Glock
-
     Ammo X16'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2091,8 +2090,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea087b00cc97e5e44bdedeeccb899e05, type: 3}
-<<<<<<< HEAD
-=======
 --- !u!43 &393930611
 Mesh:
   m_ObjectHideFlags: 0
@@ -2256,7 +2253,7 @@ Mesh:
     offset: 0
     size: 0
     path: 
->>>>>>> ee3538fd68b267a090a19bfacdd40652c01a5fea
+ee3538fd68b267a090a19bfacdd40652c01a5fea
 --- !u!1001 &397663142
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3084,7 +3081,7 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 724809314}
     m_Modifications:
-    - target: {fileID: 1564588708269752, guid: 826ffc5d8c7db2342a086c89348db5f0, type: 3}
+    - target: {fileID: 15645887<<<<<<08269752, guid: 826ffc5d8c7db2342a086c89348db5f0, type: 3}
       propertyPath: m_Name
       value: Glock pickup
       objectReference: {fileID: 0}
