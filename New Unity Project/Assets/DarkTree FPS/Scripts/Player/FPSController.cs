@@ -101,7 +101,6 @@ namespace DarkTreeFPS
                 var dis = Vector3.Distance(gameObject.transform.position, cabin.transform.position);
                 if (Input.GetKeyDown(KeyCode.B))
                 {
-<<<<<<< HEAD
                     shop.SetActive(false);
                     isShopActive = false;
                     lockCursor = true;
@@ -133,7 +132,7 @@ namespace DarkTreeFPS
                     lockCursor = false;
                     mouseLookEnabled = false;
                     Time.timeScale = 0;
-=======
+
                     if (isShopActive)
                     {
                         shop.SetActive(false);
@@ -144,7 +143,6 @@ namespace DarkTreeFPS
                         shop.SetActive(true);
                         isShopActive = true;
                     }
->>>>>>> ee3538fd68b267a090a19bfacdd40652c01a5fea
                 }
             }
 
