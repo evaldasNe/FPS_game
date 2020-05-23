@@ -8,7 +8,7 @@ public class BillboardScript : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.Find("Player Camera").transform;
+        player = GameObject.Find("WeaponCamera").transform;
     }
 
     void LateUpdate()

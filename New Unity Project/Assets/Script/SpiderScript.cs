@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DarkTreeFPS;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro.Examples;
@@ -14,7 +15,8 @@ public class SpiderScript : MonoBehaviour
     DateTime attackTime;
     int damage = 1;
 
-    Transform target;
+    public Transform target;
+    public EnemySpawner es;
     NavMeshAgent agent;
     HealthBarScript healthBar;
     Animation anim;
@@ -34,9 +36,9 @@ public class SpiderScript : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(target.position, transform.position);
-
         if (isDead)
         {
+
             if ((DateTime.Now - deathTime).TotalSeconds >= anim["death2"].length)
             {
                 Die();
@@ -57,12 +59,26 @@ public class SpiderScript : MonoBehaviour
                 anim.Play("attack2");
                 if (attackTime == null)
                 {
-                    target.GetComponentInChildren<PlayerGunController>().TakeDamage(damage);
+                    if (GameObject.Find("Player").GetComponent<PlayerStats>())
+                    {
+                        GameObject.Find("Player").GetComponent<PlayerStats>().ApplyDamage(damage);
+                    }
+                    else
+                    {
+                        target.GetComponentInChildren<PlayerGunController>().TakeDamage(damage);
+                    }
                     attackTime = DateTime.Now;
                 } 
                 else if ((DateTime.Now - attackTime).TotalSeconds >= anim["attack2"].length)
                 {
-                    target.GetComponentInChildren<PlayerGunController>().TakeDamage(damage);
+                    if (GameObject.Find("Player").GetComponent<PlayerStats>())
+                    {
+                        GameObject.Find("Player").GetComponent<PlayerStats>().ApplyDamage(damage);
+                    }
+                    else
+                    {
+                        target.GetComponentInChildren<PlayerGunController>().TakeDamage(damage);
+                    }
                     attackTime = DateTime.Now;
                 }
             }
@@ -89,7 +105,7 @@ public class SpiderScript : MonoBehaviour
 
     void Die()
     {
-        target.GetComponentInChildren<PlayerGunController>().IncreaseCounter();
         Destroy(gameObject);
+        es.EnemyEliminated();
     }
 }

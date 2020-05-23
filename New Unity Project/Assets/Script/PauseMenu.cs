@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DarkTreeFPS;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,47 +8,20 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUi;
-    public GameObject Canvas;
-    public GameObject PlayerModel;
-    private GameObject Target;
+    FPSController controller;
 
     private void Start()
     {
-        Target = GameObject.Find("Crosshair Canvas");
+        pauseMenuUi.SetActive(false);
+        controller = FindObjectOfType<FPSController>();
     }
     // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(GameIsPaused)
-            {
-                Resume();
-            } else
-            {
-                Pause();
-            }
-        }
-    }
     public void Resume()
     {
         pauseMenuUi.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        Canvas.SetActive(true);
-        Target.SetActive(true);
-        Cursor.lockState = CursorLockMode.Locked;
-        PlayerModel.GetComponent<PlayerGunController>().enabled = true;
-    }
-    void Pause ()
-    {
-        pauseMenuUi.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-        Canvas.SetActive(false);
-        Target.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
-        PlayerModel.GetComponent<PlayerGunController>().enabled = false;
+        controller.lockCursor = true;
     }
     public void LoadMenu()
     {
