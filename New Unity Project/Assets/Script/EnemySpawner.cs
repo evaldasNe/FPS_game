@@ -12,6 +12,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject fatmanpreftab;
 
     public PlayerStats player;
+    public float Spawntime = 5;
     public float spawnInterval = 2; //Spawn new enemy each n seconds
     public int enemiesPerWave = 5; //How many enemies per wave
     public int enemiesPerWaveincrease = 2;
@@ -19,7 +20,7 @@ public class EnemySpawner : MonoBehaviour
 
     public float nextSpawnTime = 10;
     int waveNumber = 1;
-    bool waitingForWave = true;
+    public bool waitingForWave = true;
     public float newWaveTimer = 10;
     int enemiesToEliminate;
     //How many enemies we already eliminated in the current wave
@@ -105,6 +106,7 @@ public class EnemySpawner : MonoBehaviour
         if (enemiesToEliminate - enemiesEliminated <= 0)
         {
             //Start next wave
+            newWaveTimer = Spawntime;
             waitingForWave = true;
             waveNumber++;
         }

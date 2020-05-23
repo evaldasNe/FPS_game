@@ -2,6 +2,7 @@
 /// If you have any questions feel free to write me at email --- darktreedevelopment@gmail.com ---
 /// Thanks for purchasing my asset!
 
+using TMPro.Examples;
 using UnityEngine;
 
 namespace DarkTreeFPS
@@ -13,7 +14,7 @@ namespace DarkTreeFPS
         public float crouchSpeed = 0.4f;
         public float runSpeedMultiplier = 2f;
         public float jumpForce = 4f;
-        
+
         public float crouchHeight = 0.5f;
         private bool crouch = false;
 
@@ -23,20 +24,20 @@ namespace DarkTreeFPS
         public bool lockCursor;
         public Vector2 sensitivity = new Vector2(0.5f, 0.5f);
         public Vector2 smoothing = new Vector2(3, 3);
-        
+
         [HideInInspector]
         public Vector2 targetDirection;
 
         [HideInInspector]
         public Rigidbody controllerRigidbody;
-        
+
         private CapsuleCollider controllerCollider;
         public Transform camHolder;
         private float moveSpeedLocal;
 
         Vector2 _mouseAbsolute;
         Vector2 _smoothMouse;
-        
+
         private float distanceToGround;
 
         private Animator weaponHolderAnimator;
@@ -50,18 +51,23 @@ namespace DarkTreeFPS
 
         //Velocity calculation variable
         private Vector3 previousPos = new Vector3();
-        
+
         Vector3 dirVector;
 
         InputManager inputManager;
 
         GameObject shop;
         bool isShopActive = false;
+        EnemySpawner spawnerscript;
+        
 
         private void Start()
         {
             shop = GameObject.FindGameObjectWithTag("Shop");
             shop.SetActive(false);
+
+            GameObject spawner = GameObject.Find("Spawner");
+            spawnerscript = spawner.GetComponent<EnemySpawner>();
 
             controllerRigidbody = GetComponent<Rigidbody>();
             controllerCollider = GetComponent<CapsuleCollider>();
@@ -76,7 +82,6 @@ namespace DarkTreeFPS
         private void Update()
         {
             var dis = Vector3.Distance(gameObject.transform.position, GameObject.Find("Cabin1_DM").transform.position);
-
             if (Input.GetKeyDown(KeyCode.B))
             {
                 if (isShopActive)
@@ -84,7 +89,7 @@ namespace DarkTreeFPS
                     shop.SetActive(false);
                     isShopActive = false;
                 }
-                else if (dis <= 6)
+                else if (dis <= 6 && spawnerscript.waitingForWave == true)
                 {
                     shop.SetActive(true);
                     isShopActive = true;
@@ -93,9 +98,9 @@ namespace DarkTreeFPS
 
             if (mouseLookEnabled && !InventoryManager.showInventory)
                 MouseLook();
-            
-                StandaloneMovement();
-            
+
+            StandaloneMovement();
+
 
             if (lockCursor)
             {
@@ -214,14 +219,14 @@ namespace DarkTreeFPS
                 Jump();
                 crouch = false;
             }
-            
+
         }
-        
+
         void FixedUpdate()
         {
             CharacterMovement();
         }
-        
+
         void CharacterMovement()
         {
             var camForward = camHolder.transform.forward;
@@ -231,29 +236,29 @@ namespace DarkTreeFPS
             camRight.y = 0f;
             camForward.Normalize();
             camRight.Normalize();
-            
+
             if (isClimbing)
             {
                 crouch = false;
 
                 weaponHolderAnimator.SetBool("HideWeapon", true);
                 controllerRigidbody.useGravity = false;
-                
-                    dirVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-                
-                
+
+                dirVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+
+
                 Vector3 verticalDirection = transform.up;
-                Vector3 moveDirection = (verticalDirection) * dirVector.z+ camRight * dirVector.x;
-                
+                Vector3 moveDirection = (verticalDirection) * dirVector.z + camRight * dirVector.x;
+
                 controllerRigidbody.MovePosition(transform.position + moveDirection * moveSpeedLocal * Time.deltaTime);
             }
             else
             {
                 weaponHolderAnimator.SetBool("HideWeapon", false);
                 controllerRigidbody.useGravity = true;
-                
-                    dirVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-                
+
+                dirVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+
                 Vector3 moveDirection = camForward * dirVector.z + camRight * dirVector.x;
 
                 controllerRigidbody.MovePosition(transform.position + moveDirection * moveSpeedLocal * Time.deltaTime);
@@ -262,45 +267,45 @@ namespace DarkTreeFPS
 
         bool CheckMovement()
         {
-                if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0 || Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0)
-                {
-                    return true;
-                }
-            
-            
+            if (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0 || Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0)
+            {
+                return true;
+            }
+
+
             return false;
         }
-        
+
         void MouseLook()
         {
-                Quaternion targetOrientation = Quaternion.Euler(targetDirection);
+            Quaternion targetOrientation = Quaternion.Euler(targetDirection);
 
-                Vector2 mouseDelta = new Vector2();
-            
-                    mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-                
+            Vector2 mouseDelta = new Vector2();
 
-                mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x, sensitivity.y * smoothing.y));
+            mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
 
-                _smoothMouse.x = Mathf.Lerp(_smoothMouse.x, mouseDelta.x, 1f / smoothing.x);
-                _smoothMouse.y = Mathf.Lerp(_smoothMouse.y, mouseDelta.y, 1f / smoothing.y);
 
-                _mouseAbsolute += _smoothMouse;
+            mouseDelta = Vector2.Scale(mouseDelta, new Vector2(sensitivity.x * smoothing.x, sensitivity.y * smoothing.y));
 
-                if (clampInDegrees.x < 360)
-                    _mouseAbsolute.x = Mathf.Clamp(_mouseAbsolute.x, -clampInDegrees.x * 0.5f, clampInDegrees.x * 0.5f);
+            _smoothMouse.x = Mathf.Lerp(_smoothMouse.x, mouseDelta.x, 1f / smoothing.x);
+            _smoothMouse.y = Mathf.Lerp(_smoothMouse.y, mouseDelta.y, 1f / smoothing.y);
 
-                var xRotation = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right);
+            _mouseAbsolute += _smoothMouse;
+
+            if (clampInDegrees.x < 360)
+                _mouseAbsolute.x = Mathf.Clamp(_mouseAbsolute.x, -clampInDegrees.x * 0.5f, clampInDegrees.x * 0.5f);
+
+            var xRotation = Quaternion.AngleAxis(-_mouseAbsolute.y, targetOrientation * Vector3.right);
             camHolder.transform.localRotation = xRotation;
 
-                if (clampInDegrees.y < 360)
-                    _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
+            if (clampInDegrees.y < 360)
+                _mouseAbsolute.y = Mathf.Clamp(_mouseAbsolute.y, -clampInDegrees.y * 0.5f, clampInDegrees.y * 0.5f);
 
-                var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, camHolder.transform.InverseTransformDirection(Vector3.up));
+            var yRotation = Quaternion.AngleAxis(_mouseAbsolute.x, camHolder.transform.InverseTransformDirection(Vector3.up));
             camHolder.transform.localRotation *= yRotation;
             camHolder.transform.rotation *= targetOrientation;
         }
-        
+
         void Crouch()
         {
             if (crouch == true)
@@ -324,7 +329,7 @@ namespace DarkTreeFPS
                     crouch = true;
             }
         }
-        
+
         public float GetVelocityMagnitude()
         {
             var velocity = ((transform.position - previousPos).magnitude) / Time.deltaTime;
@@ -350,7 +355,7 @@ namespace DarkTreeFPS
 
         void Landing()
         {
-            if(!isGrounded())
+            if (!isGrounded())
             {
                 inAirTime += Time.deltaTime;
             }
