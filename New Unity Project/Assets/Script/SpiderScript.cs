@@ -106,6 +106,9 @@ public class SpiderScript : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
-        es.EnemyEliminated();
+        if (es != null)
+            es.EnemyEliminated();
+
+        GameObject.FindGameObjectWithTag("Player").GetComponent<FPSController>().IncreaseMoney(50);
     }
 }
