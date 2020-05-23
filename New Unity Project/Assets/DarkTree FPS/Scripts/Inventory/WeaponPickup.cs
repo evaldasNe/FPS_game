@@ -9,7 +9,7 @@ namespace DarkTreeFPS
     public class WeaponPickup : MonoBehaviour
     {
         private WeaponManager weaponManager;
-        
+
         public int ammoInWeaponCount;
         public string weaponNameToEquip;
 
@@ -20,9 +20,9 @@ namespace DarkTreeFPS
 
         public void Pickup()
         {
-                    weaponManager.EquipWeapon(weaponNameToEquip, gameObject);
-                    print("Pickup:" + weaponNameToEquip);
-            
+            weaponManager.EquipWeapon(weaponNameToEquip, gameObject);
+            print("Pickup:" + weaponNameToEquip);
+
         }
     }
 }

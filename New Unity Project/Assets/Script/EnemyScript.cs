@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using UnityEditor.XR;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.AI; 
 
 public class EnemyScript : MonoBehaviour
 {
     public int health;
     float lookRadius = 20f;
 
-    Transform target;
+    public Transform target;
+    public EnemySpawner es;
     NavMeshAgent agent;
     HealthBarScript healthBar;
     Animator animator;
+    Collider coll;
 
     private void Start()
     {
@@ -66,9 +68,7 @@ public class EnemyScript : MonoBehaviour
 
     void Die()
     {
-        if (target.GetComponentInChildren<PlayerGunController>())
-            target.GetComponentInChildren<PlayerGunController>().IncreaseCounter();
-        
+        es.EnemyEliminated();
         Destroy(gameObject);
     }
 }
