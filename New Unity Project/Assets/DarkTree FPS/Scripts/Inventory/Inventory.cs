@@ -30,13 +30,16 @@ namespace DarkTreeFPS
 
             characterItems.Add(item);
             inventoryUI.AddNewItem(item);
-            item.gameObject.SetActive(false);
+            if (item.type != ItemType.ammo)
+            {
+                item.gameObject.SetActive(false);
 
-            if (debug) Debug.Log("Added item: " + item.title);
+                if (debug) Debug.Log("Added item: " + item.title);
 
-            //Events
-            item.onPickupEvent.Invoke();
-            onAddItem.Invoke();
+                //Events
+                item.onPickupEvent.Invoke();
+                onAddItem.Invoke();
+            }
         }
 
         //Method return true if inventory found free space

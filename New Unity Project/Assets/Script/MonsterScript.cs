@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DarkTreeFPS;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -69,5 +70,6 @@ public class MonsterScript : MonoBehaviour
             target.GetComponentInChildren<PlayerGunController>().IncreaseCounter();
 
         Destroy(gameObject);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<FPSController>().IncreaseMoney(100);
     }
 }
