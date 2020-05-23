@@ -15,6 +15,13 @@ TagManager:
   - NPC
   - Flesh
   - Cover
+  - Monster
+  - Enemy
+  - Spider
+  - Floor
+  - Water
+  - Door
+  - Shop
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,6 @@ namespace DarkTreeFPS
         private void Start()
         {
             weaponManager = FindObjectOfType<WeaponManager>();
-            weaponManager.EquipWeapon("Glock",gameObject);
         }
 
         public void Pickup()

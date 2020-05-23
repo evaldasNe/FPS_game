@@ -121,7 +121,11 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
+<<<<<<< HEAD
   m_NavMeshData: {fileID: 23800000, guid: 1727d00727b30184da1c99433739a91f, type: 2}
+=======
+  m_NavMeshData: {fileID: 23800000, guid: 3e92cf3a839a9bc4a8cd292c80de5b3b, type: 2}
+>>>>>>> 392f8f21cfec44e3fe8536b6eabaec41362a8158
 --- !u!1001 &7644882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2634,7 +2638,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh37152
+  m_Name: pb_Mesh46104
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -6383,12 +6387,12 @@ GameObject:
   - component: {fileID: 1038516492}
   - component: {fileID: 1038516491}
   m_Layer: 5
-  m_Name: Canvas
-  m_TagString: Untagged
+  m_Name: Shop
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1038516491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7122,6 +7126,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5530369604592756904, guid: 770274626b5a55541bc7ad8e0aa82746,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6630895775895363211, guid: 770274626b5a55541bc7ad8e0aa82746,
         type: 3}
       propertyPath: moveSpeed
@@ -7156,6 +7165,11 @@ PrefabInstance:
         type: 3}
       propertyPath: currentWeaponIndex
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6631328566690371131, guid: 770274626b5a55541bc7ad8e0aa82746,
+        type: 3}
+      propertyPath: health
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6720271045585377670, guid: 770274626b5a55541bc7ad8e0aa82746,
         type: 3}
