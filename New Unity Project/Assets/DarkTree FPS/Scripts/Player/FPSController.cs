@@ -59,12 +59,18 @@ namespace DarkTreeFPS
         GameObject shop;
         bool isShopActive = false;
         EnemySpawner spawnerscript;
-        
+
+        static bool GameIsPaused = false;
+        GameObject pauseMenuUi;
+
+
 
         private void Start()
         {
             shop = GameObject.FindGameObjectWithTag("Shop");
             shop.SetActive(false);
+
+            pauseMenuUi = GameObject.Find("Pause Menu Canvas");
 
             GameObject spawner = GameObject.Find("Spawner");
             spawnerscript = spawner.GetComponent<EnemySpawner>();
@@ -88,16 +94,41 @@ namespace DarkTreeFPS
                 {
                     shop.SetActive(false);
                     isShopActive = false;
+                    lockCursor = true;
+                    mouseLookEnabled = true;
                 }
                 else if (dis <= 6 && spawnerscript.waitingForWave == true)
                 {
                     shop.SetActive(true);
                     isShopActive = true;
+                    lockCursor = false;
+                    mouseLookEnabled = false;
+
+                }
+            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (GameIsPaused)
+                {
+                    pauseMenuUi.SetActive(false);
+                    Time.timeScale = 1f;
+                    GameIsPaused = false;
+                    lockCursor = true;
+                    mouseLookEnabled = true;
+                }
+                else
+                {
+                    pauseMenuUi.SetActive(true);
+                    GameIsPaused = true;
+                    lockCursor = false;
+                    mouseLookEnabled = false;
+                    Time.timeScale = 0;
                 }
             }
 
             if (mouseLookEnabled && !InventoryManager.showInventory)
                 MouseLook();
+
 
             StandaloneMovement();
 

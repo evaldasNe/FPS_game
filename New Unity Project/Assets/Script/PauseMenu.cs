@@ -8,46 +8,20 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUi;
-    public GameObject Canvas;
-    public GameObject PlayerModel1;
-    public GameObject Camera;
+    FPSController controller;
 
     private void Start()
     {
-        
+        pauseMenuUi.SetActive(false);
+        controller = FindObjectOfType<FPSController>();
     }
     // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(GameIsPaused)
-            {
-                Resume();
-            } else
-            {
-                Pause();
-            }
-        }
-    }
     public void Resume()
     {
         pauseMenuUi.SetActive(false);
         Time.timeScale = 1f;
         GameIsPaused = false;
-        Canvas.SetActive(true);
-        Cursor.lockState = CursorLockMode.Locked;
-        PlayerModel1.GetComponent<Weapon>().enabled = true;
-    }
-    void Pause ()
-    {
-        pauseMenuUi.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
-        Canvas.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
-        PlayerModel1.GetComponent<Weapon>().enabled = false;
-       
+        controller.lockCursor = true;
     }
     public void LoadMenu()
     {
