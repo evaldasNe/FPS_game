@@ -278,6 +278,11 @@ namespace DarkTreeFPS
                 if (GameObject.Find("DynamicReticle") != null)
                     dynamicReticle = GameObject.Find("DynamicReticle").GetComponent<RectTransform>();
             }
+
+            var item = new Item(ammoItemID, "ammo", "ammo", ItemType.ammo);
+            item.ammo = 50;
+
+            inventory.GiveItem(item);
         }
 
 

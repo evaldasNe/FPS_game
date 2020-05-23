@@ -2,6 +2,7 @@
 /// If you have any questions feel free to write me at email --- darktreedevelopment@gmail.com ---
 /// Thanks for purchasing my asset!
 
+using TMPro;
 using TMPro.Examples;
 using UnityEngine;
 
@@ -62,18 +63,25 @@ namespace DarkTreeFPS
 
         static bool GameIsPaused = false;
         GameObject pauseMenuUi;
-
-
+        TextMeshProUGUI moneyText;
+        int money = 0;
 
         private void Start()
         {
+            moneyText = GameObject.Find("Money").GetComponent<TextMeshProUGUI>();
+
             shop = GameObject.FindGameObjectWithTag("Shop");
-            shop.SetActive(false);
+            if (shop != null)
+                shop.SetActive(false);
 
             pauseMenuUi = GameObject.Find("Pause Menu Canvas");
 
             GameObject spawner = GameObject.Find("Spawner");
-            spawnerscript = spawner.GetComponent<EnemySpawner>();
+            if (spawner != null)
+            {
+                spawnerscript = spawner.GetComponent<EnemySpawner>();
+            }
+            
 
             controllerRigidbody = GetComponent<Rigidbody>();
             controllerCollider = GetComponent<CapsuleCollider>();
@@ -87,11 +95,13 @@ namespace DarkTreeFPS
 
         private void Update()
         {
-            var dis = Vector3.Distance(gameObject.transform.position, GameObject.Find("Cabin1_DM").transform.position);
-            if (Input.GetKeyDown(KeyCode.B))
+            var cabin = GameObject.Find("Cabin1_DM");
+            if (cabin != null)
             {
-                if (isShopActive)
+                var dis = Vector3.Distance(gameObject.transform.position, cabin.transform.position);
+                if (Input.GetKeyDown(KeyCode.B))
                 {
+<<<<<<< HEAD
                     shop.SetActive(false);
                     isShopActive = false;
                     lockCursor = true;
@@ -123,6 +133,18 @@ namespace DarkTreeFPS
                     lockCursor = false;
                     mouseLookEnabled = false;
                     Time.timeScale = 0;
+=======
+                    if (isShopActive)
+                    {
+                        shop.SetActive(false);
+                        isShopActive = false;
+                    }
+                    else if (dis <= 6 && spawnerscript.waitingForWave == true)
+                    {
+                        shop.SetActive(true);
+                        isShopActive = true;
+                    }
+>>>>>>> ee3538fd68b267a090a19bfacdd40652c01a5fea
                 }
             }
 
@@ -397,6 +419,12 @@ namespace DarkTreeFPS
 
                 inAirTime = 0;
             }
+        }
+
+        public void IncreaseMoney(int amount)
+        {
+            money += amount;
+            moneyText.text = money.ToString();
         }
     }
 }

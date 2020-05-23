@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DarkTreeFPS;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.XR;
 using UnityEngine;
@@ -68,7 +69,10 @@ public class EnemyScript : MonoBehaviour
 
     void Die()
     {
-        es.EnemyEliminated();
+        if (es != null)
+            es.EnemyEliminated();
+
         Destroy(gameObject);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<FPSController>().IncreaseMoney(50);
     }
 }
