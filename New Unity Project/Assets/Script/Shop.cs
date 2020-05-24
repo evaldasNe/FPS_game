@@ -19,7 +19,6 @@ public class Shop : MonoBehaviour
     public GameObject Ammo3;
      void Start()
     {
-        Ammo.GetComponent<Button>().interactable = true;
         Ammo1.GetComponent<Button>().interactable = false;
         Ammo2.GetComponent<Button>().interactable = false;
         Ammo3.GetComponent<Button>().interactable = false;
