@@ -427,31 +427,51 @@ namespace DarkTreeFPS
             moneyText.text = money.ToString();
         }
 
+        public int GetMoney()
+        {
+            return money;
+        }
+
         public void ChangeToAR15()
         {
-            GetCurrentGun().SetActive(false);
+            int price = 1000;
+            if (money >= price)
+            {
+                GetCurrentGun().SetActive(false);
 
-            var newGun = guns.Where(g => g.name == "AR15").FirstOrDefault();
-            newGun.SetActive(true);
-            currentGun = "AR15";
+                var newGun = guns.Where(g => g.name == "AR15").FirstOrDefault();
+                newGun.SetActive(true);
+                currentGun = "AR15";
+                money -= price;
+            }
         }
 
         public void ChangeToScar()
         {
-            GetCurrentGun().SetActive(false);
+            int price = 3000;
+            if (money >= price)
+            {
+                GetCurrentGun().SetActive(false);
 
-            var newGun = guns.Where(g => g.name == "SCAR").FirstOrDefault();
-            newGun.SetActive(true);
-            currentGun = "SCAR";
+                var newGun = guns.Where(g => g.name == "SCAR").FirstOrDefault();
+                newGun.SetActive(true);
+                currentGun = "SCAR";
+                money -= price;
+            }
         }
 
         public void ChangeToSniper()
         {
-            GetCurrentGun().SetActive(false);
+            int price = 10000;
+            if (money >= price)
+            {
+                GetCurrentGun().SetActive(false);
 
-            var newGun = guns.Where(g => g.name == "M82A1").FirstOrDefault();
-            newGun.SetActive(true);
-            currentGun = "M82A1";
+                var newGun = guns.Where(g => g.name == "M82A1").FirstOrDefault();
+                newGun.SetActive(true);
+                currentGun = "M82A1";
+                money -= price;
+            }
         }
 
         private GameObject GetCurrentGun()
