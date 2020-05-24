@@ -439,7 +439,7 @@ namespace DarkTreeFPS
 
         public void ChangeToAR15()
         {
-            int price = 0;
+            int price = 500;
             if (money >= price)
             {
                 GetCurrentGun().SetActive(false);
@@ -456,7 +456,7 @@ namespace DarkTreeFPS
 
         public void ChangeToScar()
         {
-            int price = 0;
+            int price = 1500;
             if (money >= price)
             {
                 GetCurrentGun().SetActive(false);
