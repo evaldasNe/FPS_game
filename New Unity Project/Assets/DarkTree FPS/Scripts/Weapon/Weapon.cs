@@ -354,7 +354,9 @@ namespace DarkTreeFPS
 
         public void Fire()
         {
-            if (weaponType != WeaponType.Melee && weaponType != WeaponType.Grenade)
+            var shop = GameObject.FindGameObjectWithTag("Shop");
+ 
+            if (weaponType != WeaponType.Melee && weaponType != WeaponType.Grenade && shop == null)
             {
                 if (Time.time > nextFireTime && !reloading && canShot && !controller.isClimbing) //Allow fire statement
                 {
@@ -981,6 +983,17 @@ namespace DarkTreeFPS
                 weaponNameText.text = "";
             if (ammoText)
                 ammoText.text = "";
+        }
+
+        public void AddAmmo(int amount)
+        {
+            if (gameObject.activeSelf)
+            {
+                var item = new Item(ammoItemID, "ammo", "ammo", ItemType.ammo);
+                item.ammo = amount;
+
+                inventory.GiveItem(item);
+            }
         }
     }
 }

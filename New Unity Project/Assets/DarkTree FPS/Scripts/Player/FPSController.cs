@@ -2,6 +2,10 @@
 /// If you have any questions feel free to write me at email --- darktreedevelopment@gmail.com ---
 /// Thanks for purchasing my asset!
 
+using Boo.Lang;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using TMPro.Examples;
 using UnityEngine;
@@ -64,17 +68,25 @@ namespace DarkTreeFPS
         static bool GameIsPaused = false;
         GameObject pauseMenuUi;
         TextMeshProUGUI moneyText;
-        int money = 0;
+        static int money = 0;
+
+        private IEnumerable<GameObject> guns;
+        string currentGun = "Glock";
 
         private void Start()
         {
+            DontDestroyOnLoad(gameObject);
+            string[] allGuns = new string[] { "M82A1", "SCAR", "AR15", "Glock" };
+            guns = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name) && o.tag == "Gun");
+
             moneyText = GameObject.Find("Money").GetComponent<TextMeshProUGUI>();
+            moneyText.text = money.ToString();
 
             shop = GameObject.FindGameObjectWithTag("Shop");
             if (shop != null)
                 shop.SetActive(false);
 
-            pauseMenuUi = GameObject.Find("Pause Menu Canvas");
+            pauseMenuUi = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => o.tag == "Pause").FirstOrDefault();
 
             GameObject spawner = GameObject.Find("Spawner");
             if (spawner != null)
@@ -101,7 +113,6 @@ namespace DarkTreeFPS
                 var dis = Vector3.Distance(gameObject.transform.position, cabin.transform.position);
                 if (Input.GetKeyDown(KeyCode.B))
                 {
-<<<<<<< HEAD
                     shop.SetActive(false);
                     isShopActive = false;
                     lockCursor = true;
@@ -121,7 +132,7 @@ namespace DarkTreeFPS
                 if (GameIsPaused)
                 {
                     pauseMenuUi.SetActive(false);
-                    Time.timeScale = 1f;
+                    Time.timeScale = 1;
                     GameIsPaused = false;
                     lockCursor = true;
                     mouseLookEnabled = true;
@@ -133,20 +144,9 @@ namespace DarkTreeFPS
                     lockCursor = false;
                     mouseLookEnabled = false;
                     Time.timeScale = 0;
-=======
-                    if (isShopActive)
-                    {
-                        shop.SetActive(false);
-                        isShopActive = false;
-                    }
-                    else if (dis <= 6 && spawnerscript.waitingForWave == true)
-                    {
-                        shop.SetActive(true);
-                        isShopActive = true;
-                    }
->>>>>>> ee3538fd68b267a090a19bfacdd40652c01a5fea
                 }
             }
+            
 
             if (mouseLookEnabled && !InventoryManager.showInventory)
                 MouseLook();
@@ -425,6 +425,38 @@ namespace DarkTreeFPS
         {
             money += amount;
             moneyText.text = money.ToString();
+        }
+
+        public void ChangeToAR15()
+        {
+            GetCurrentGun().SetActive(false);
+
+            var newGun = guns.Where(g => g.name == "AR15").FirstOrDefault();
+            newGun.SetActive(true);
+            currentGun = "AR15";
+        }
+
+        public void ChangeToScar()
+        {
+            GetCurrentGun().SetActive(false);
+
+            var newGun = guns.Where(g => g.name == "SCAR").FirstOrDefault();
+            newGun.SetActive(true);
+            currentGun = "SCAR";
+        }
+
+        public void ChangeToSniper()
+        {
+            GetCurrentGun().SetActive(false);
+
+            var newGun = guns.Where(g => g.name == "M82A1").FirstOrDefault();
+            newGun.SetActive(true);
+            currentGun = "M82A1";
+        }
+
+        private GameObject GetCurrentGun()
+        {
+            return guns.Where(g => g.name == currentGun).FirstOrDefault();
         }
     }
 }
