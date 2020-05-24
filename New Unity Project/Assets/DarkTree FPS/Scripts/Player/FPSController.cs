@@ -2,6 +2,7 @@
 /// If you have any questions feel free to write me at email --- darktreedevelopment@gmail.com ---
 /// Thanks for purchasing my asset!
 
+using System.Linq;
 using TMPro;
 using TMPro.Examples;
 using UnityEngine;
@@ -413,6 +414,51 @@ namespace DarkTreeFPS
         {
             money += amount;
             moneyText.text = money.ToString();
+        }
+
+        private string[] allGuns = new string[] { "M82A1", "SCAR", "AR15", "Glock" };
+
+        public void ChangeToAR15()
+        {
+            GetCurrentGun().SetActive(false);
+
+            var res = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name));
+            foreach (var item in res)
+            {
+                if (item.name == "AR15")
+                    item.SetActive(true);
+            }
+        }
+
+        public void ChangeToScar()
+        {
+            GetCurrentGun().SetActive(false);
+
+            var res = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name));
+            foreach (var item in res)
+            {
+                if (item.name == "SCAR")
+                    item.SetActive(true);
+            }
+        }
+
+        public void ChangeToSniper()
+        {
+            GetCurrentGun().SetActive(false);
+
+            var res = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name));
+            foreach (var item in res)
+            {
+                if (item.name == "M82A1")
+                    item.SetActive(true);
+            }
+        }
+
+        private GameObject GetCurrentGun()
+        {
+            var gun = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name) && o.activeSelf).FirstOrDefault();
+
+            return gun;
         }
     }
 }
