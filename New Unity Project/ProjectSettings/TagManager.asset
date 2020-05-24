@@ -22,6 +22,8 @@ TagManager:
   - Water
   - Door
   - Shop
+  - LightningBolt
+  - Pause
   layers:
   - Default
   - TransparentFX
