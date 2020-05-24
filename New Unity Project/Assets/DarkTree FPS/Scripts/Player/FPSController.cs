@@ -138,10 +138,10 @@ namespace DarkTreeFPS
                 else
                 {
                     pauseMenuUi.SetActive(true);
+                    Time.timeScale = 0;
                     GameIsPaused = true;
                     lockCursor = false;
                     mouseLookEnabled = false;
-                    Time.timeScale = 0;
                 }
             }
             
