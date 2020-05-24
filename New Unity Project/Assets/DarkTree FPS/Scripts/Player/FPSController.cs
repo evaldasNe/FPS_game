@@ -109,14 +109,14 @@ namespace DarkTreeFPS
             if (cabin != null)
             {
                 var dis = Vector3.Distance(gameObject.transform.position, cabin.transform.position);
-                if (Input.GetKeyDown(KeyCode.B))
+                if (Input.GetKeyDown(KeyCode.B) && isShopActive)
                 {
                     shop.SetActive(false);
                     isShopActive = false;
                     lockCursor = true;
                     mouseLookEnabled = true;
                 }
-                else if (dis <= 6 && spawnerscript.waitingForWave == true)
+                else if (Input.GetKeyDown(KeyCode.B) && dis <= 6 && spawnerscript.waitingForWave == true)
                 {
                     shop.SetActive(true);
                     isShopActive = true;
