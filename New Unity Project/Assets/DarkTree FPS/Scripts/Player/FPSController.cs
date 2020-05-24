@@ -63,7 +63,7 @@ namespace DarkTreeFPS
         InputManager inputManager;
 
         GameObject shop;
-        bool isShopActive = false;
+        public bool isShopActive = false;
         EnemySpawner spawnerscript;
 
         static bool GameIsPaused = false;
