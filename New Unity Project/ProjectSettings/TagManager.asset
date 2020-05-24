@@ -24,6 +24,7 @@ TagManager:
   - Shop
   - LightningBolt
   - Pause
+  - Gun
   layers:
   - Default
   - TransparentFX
