@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class MonsterScript : MonoBehaviour
 {
@@ -29,8 +30,9 @@ public class MonsterScript : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(target.position, transform.position);
+        var currentScene = SceneManager.GetActiveScene().name;
 
-        if (distance <= lookRadius || health < 100)
+        if (distance <= lookRadius || health < 100 || currentScene == "Level2")
         {
             animator.SetTrigger("IsRunning");
             agent.SetDestination(target.position);
