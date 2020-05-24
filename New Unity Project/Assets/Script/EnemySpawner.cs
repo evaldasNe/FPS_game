@@ -68,25 +68,24 @@ public class EnemySpawner : MonoBehaviour
             if (Time.time > nextSpawnTime)
             {
                 nextSpawnTime = Time.time + spawnInterval;
+                Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
 
                 //Spawn enemy 
                 if (totalEnemiesSpawned < enemiesToEliminate)
                 {
-                    Transform randomPoint = spawnPoints[Random.Range(0, spawnPoints.Length - 1)];
-
                     GameObject enemy = Instantiate(enemyPrefab, randomPoint.position, Quaternion.identity);
                     EnemyScript npc = enemy.GetComponent<EnemyScript>();
                     npc.target= player.transform;
                     npc.es = this;
                     totalEnemiesSpawned++;
-                    if(waveNumber > 2)
-                    {
-                        GameObject spider = Instantiate(spiderPreftab, randomPoint.position, Quaternion.identity);
-                        SpiderScript npc1 = spider.GetComponent<SpiderScript>();
-                        npc1.target = player.transform;
-                        npc1.es = this;
-                        totalEnemiesSpawned++;
-                    }
+                }
+                if (waveNumber > 2 && totalEnemiesSpawned < enemiesToEliminate)
+                {
+                    GameObject spider = Instantiate(spiderPreftab, randomPoint.position, Quaternion.identity);
+                    SpiderScript npc1 = spider.GetComponent<SpiderScript>();
+                    npc1.target = player.transform;
+                    npc1.es = this;
+                    totalEnemiesSpawned++;
                 }
             }
         }
