@@ -50,6 +50,17 @@ public class EnemySpawner : MonoBehaviour
                 enemiesEliminated = 0;
                 totalEnemiesSpawned = 0;
                 waitingForWave = false;
+
+                var shop = GameObject.Find("Shop");
+                if (shop != null)
+                {
+                    shop.SetActive(false);
+                    var player = GameObject.FindGameObjectWithTag("Player").GetComponent<FPSController>();
+                    player.isShopActive = false;
+                    player.lockCursor = true;
+                    player.mouseLookEnabled = true;
+                }
+                    
             }
         }
         else
