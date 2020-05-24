@@ -6081,17 +6081,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16eb2178ccbfdbd4eb0df6fba24428f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1916517047}
-  Sold: {fileID: 1038278013}
-  Sold1: {fileID: 1891372783}
-  Sold2: {fileID: 1197997089}
-  button1: {fileID: 497638082}
-  button2: {fileID: 1973034081}
-  button3: {fileID: 2052118776}
-  Ammo: {fileID: 420595851}
-  Ammo1: {fileID: 315098631}
-  Ammo2: {fileID: 905163237}
-  Ammo3: {fileID: 211125139}
+  controller: {fileID: 0}
+  Sold: {fileID: 0}
+  Sold1: {fileID: 0}
+  Sold2: {fileID: 0}
+  button1: {fileID: 0}
+  button2: {fileID: 0}
+  button3: {fileID: 0}
+  Ammo: {fileID: 0}
+  Ammo1: {fileID: 0}
+  Ammo2: {fileID: 0}
+  Ammo3: {fileID: 0}
 --- !u!1001 &1069381382
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7008,7 +7008,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1197897698}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1916517047}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d689de0a619f406468573c0a8535a07c, type: 3}
@@ -33670,7 +33670,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1593316627}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1197897699}
+        m_MethodName: AddHealth
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 50
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1593316627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34904,7 +34915,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1197897698}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1916517047}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a17bb8ff3dbeb345ba06600a2c8abe9, type: 3}
@@ -34995,12 +35006,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4328687631321326, guid: 111526afe01240642bfe6c4ac148bff7,
     type: 3}
   m_PrefabInstance: {fileID: 149639144}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1916517047 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6742764967329736511, guid: 770274626b5a55541bc7ad8e0aa82746,
-    type: 3}
-  m_PrefabInstance: {fileID: 1197897698}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1928422869 stripped
 GameObject:
