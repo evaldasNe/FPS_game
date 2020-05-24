@@ -2,6 +2,9 @@
 /// If you have any questions feel free to write me at email --- darktreedevelopment@gmail.com ---
 /// Thanks for purchasing my asset!
 
+using Boo.Lang;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using TMPro.Examples;
@@ -67,8 +70,14 @@ namespace DarkTreeFPS
         TextMeshProUGUI moneyText;
         int money = 0;
 
+        private IEnumerable<GameObject> guns;
+        string currentGun = "Glock";
+
         private void Start()
         {
+            string[] allGuns = new string[] { "M82A1", "SCAR", "AR15", "Glock" };
+            guns = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name) && o.tag == "Gun");
+
             moneyText = GameObject.Find("Money").GetComponent<TextMeshProUGUI>();
 
             shop = GameObject.FindGameObjectWithTag("Shop");
@@ -416,49 +425,36 @@ namespace DarkTreeFPS
             moneyText.text = money.ToString();
         }
 
-        private string[] allGuns = new string[] { "M82A1", "SCAR", "AR15", "Glock" };
-
         public void ChangeToAR15()
         {
             GetCurrentGun().SetActive(false);
 
-            var res = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name));
-            foreach (var item in res)
-            {
-                if (item.name == "AR15")
-                    item.SetActive(true);
-            }
+            var newGun = guns.Where(g => g.name == "AR15").FirstOrDefault();
+            newGun.SetActive(true);
+            currentGun = "AR15";
         }
 
         public void ChangeToScar()
         {
             GetCurrentGun().SetActive(false);
 
-            var res = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name));
-            foreach (var item in res)
-            {
-                if (item.name == "SCAR")
-                    item.SetActive(true);
-            }
+            var newGun = guns.Where(g => g.name == "SCAR").FirstOrDefault();
+            newGun.SetActive(true);
+            currentGun = "SCAR";
         }
 
         public void ChangeToSniper()
         {
             GetCurrentGun().SetActive(false);
 
-            var res = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name));
-            foreach (var item in res)
-            {
-                if (item.name == "M82A1")
-                    item.SetActive(true);
-            }
+            var newGun = guns.Where(g => g.name == "M82A1").FirstOrDefault();
+            newGun.SetActive(true);
+            currentGun = "M82A1";
         }
 
         private GameObject GetCurrentGun()
         {
-            var gun = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name) && o.activeSelf).FirstOrDefault();
-
-            return gun;
+            return guns.Where(g => g.name == currentGun).FirstOrDefault();
         }
     }
 }
