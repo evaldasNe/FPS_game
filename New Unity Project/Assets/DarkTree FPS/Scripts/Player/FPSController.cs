@@ -73,8 +73,9 @@ namespace DarkTreeFPS
 
             shop = GameObject.FindGameObjectWithTag("Shop");
             if (shop != null)
+            {
                 shop.SetActive(false);
-
+            }
             pauseMenuUi = GameObject.Find("Pause Menu Canvas");
 
             GameObject spawner = GameObject.Find("Spawner");
@@ -129,10 +130,10 @@ namespace DarkTreeFPS
                 else
                 {
                     pauseMenuUi.SetActive(true);
+                    Time.timeScale = 0;
                     GameIsPaused = true;
                     lockCursor = false;
                     mouseLookEnabled = false;
-                    Time.timeScale = 0;
                 }
             }
             
