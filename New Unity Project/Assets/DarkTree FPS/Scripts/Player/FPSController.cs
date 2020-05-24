@@ -68,17 +68,19 @@ namespace DarkTreeFPS
         static bool GameIsPaused = false;
         GameObject pauseMenuUi;
         TextMeshProUGUI moneyText;
-        int money = 0;
+        static int money = 0;
 
         private IEnumerable<GameObject> guns;
         string currentGun = "Glock";
 
         private void Start()
         {
+            DontDestroyOnLoad(gameObject);
             string[] allGuns = new string[] { "M82A1", "SCAR", "AR15", "Glock" };
             guns = Resources.FindObjectsOfTypeAll<GameObject>().Where(o => allGuns.Contains(o.name) && o.tag == "Gun");
 
             moneyText = GameObject.Find("Money").GetComponent<TextMeshProUGUI>();
+            moneyText.text = money.ToString();
 
             shop = GameObject.FindGameObjectWithTag("Shop");
             if (shop != null)

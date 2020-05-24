@@ -8,8 +8,6 @@ public class FinishPlaneScript : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        DontDestroyOnLoad(player);
         SceneManager.LoadScene("Level2");
     }
 }
