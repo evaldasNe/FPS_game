@@ -179,7 +179,23 @@ namespace DarkTreeFPS
 
         public void AddHealth(int hp)
         {
-            health += hp;
+            int price = 100;
+            var player = GameObject.FindGameObjectWithTag("Player").GetComponent<FPSController>();
+            int playerMoney = player.GetMoney();
+
+            if (playerMoney >= price)
+            {
+                if (health + hp > 100)
+                {
+                    health = 100;
+                }
+                else
+                {
+                    health += hp;
+                }
+
+                player.IncreaseMoney(-price);
+            }
         }
 
         IEnumerator HitFX()
