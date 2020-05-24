@@ -9,6 +9,7 @@ using System.Linq;
 using TMPro;
 using TMPro.Examples;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DarkTreeFPS
 {
@@ -69,6 +70,10 @@ namespace DarkTreeFPS
         GameObject pauseMenuUi;
         TextMeshProUGUI moneyText;
         static int money = 0;
+
+        public bool IsAR15 = false;
+        public bool IsScar = false;
+        public bool IsSniper = false;
 
         private IEnumerable<GameObject> guns;
         string currentGun = "Glock";
@@ -434,7 +439,7 @@ namespace DarkTreeFPS
 
         public void ChangeToAR15()
         {
-            int price = 1000;
+            int price = 0;
             if (money >= price)
             {
                 GetCurrentGun().SetActive(false);
@@ -443,12 +448,15 @@ namespace DarkTreeFPS
                 newGun.SetActive(true);
                 currentGun = "AR15";
                 money -= price;
+                IsAR15 = true;
+                IsScar = false;
+                IsSniper = false;
             }
         }
 
         public void ChangeToScar()
         {
-            int price = 3000;
+            int price = 0;
             if (money >= price)
             {
                 GetCurrentGun().SetActive(false);
@@ -457,6 +465,9 @@ namespace DarkTreeFPS
                 newGun.SetActive(true);
                 currentGun = "SCAR";
                 money -= price;
+                IsAR15 = false;
+                IsScar = true;
+                IsSniper = false;
             }
         }
 
@@ -471,10 +482,13 @@ namespace DarkTreeFPS
                 newGun.SetActive(true);
                 currentGun = "M82A1";
                 money -= price;
+                IsAR15 = false;
+                IsScar = false;
+                IsSniper = true;
             }
         }
 
-        private GameObject GetCurrentGun()
+        public GameObject GetCurrentGun()
         {
             return guns.Where(g => g.name == currentGun).FirstOrDefault();
         }
