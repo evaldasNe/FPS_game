@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class SpiderScript : MonoBehaviour
 {
@@ -46,7 +47,9 @@ public class SpiderScript : MonoBehaviour
         }
         else
         {
-            if (distance <= lookRadius || health < 100)
+            var currentScene = SceneManager.GetActiveScene().name;
+
+            if (distance <= lookRadius || health < 100 || currentScene == "Level2")
             {
                 if (!anim.IsPlaying("attack2"))
                 {

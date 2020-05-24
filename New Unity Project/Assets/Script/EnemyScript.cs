@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.XR;
 using UnityEngine;
-using UnityEngine.AI; 
+using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -32,7 +33,9 @@ public class EnemyScript : MonoBehaviour
     {
         float distance = Vector3.Distance(target.position, transform.position);
 
-        if (distance <= lookRadius || health < 100)
+        var currentScene = SceneManager.GetActiveScene().name;
+
+        if (distance <= lookRadius || health < 100 || currentScene == "Level2")
         {
             animator.SetBool("isWalking", true);
             agent.SetDestination(target.position);
