@@ -24,6 +24,8 @@ namespace DarkTreeFPS
         [Tooltip("UI element to draw health as slider")]
         public Slider healthUISlider;
 
+        public GameObject Deathscreen;
+
         [Header("Damage effect")]
         [Tooltip("UI Image with fullscreen hit fx")]
         public Image damageScreenFX;
@@ -89,11 +91,15 @@ namespace DarkTreeFPS
                     if (rigidbody_temp)
                         rigidbody_temp.constraints = RigidbodyConstraints.FreezeRotation;
                 }
+             
             }
 
             if (health <= 0 && !isPlayerDead)
             {
                 PlayerDeath();
+                Deathscreen.SetActive(true);
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
             }
 
             if (health < 0)
@@ -241,6 +247,7 @@ namespace DarkTreeFPS
                 sway.enabled = false;
 
                 isPlayerDead = true;
+
             }
             else
                 return;
