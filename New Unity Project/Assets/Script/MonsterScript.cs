@@ -11,7 +11,8 @@ public class MonsterScript : MonoBehaviour
     int health;
     float lookRadius = 20f;
 
-    Transform target;
+    public Transform target;
+    public EnemySpawner es;
     NavMeshAgent agent;
     HealthBarScript healthBar;
     Animator animator;
@@ -68,8 +69,8 @@ public class MonsterScript : MonoBehaviour
 
     void Die()
     {
-        if (target.GetComponentInChildren<PlayerGunController>())
-            target.GetComponentInChildren<PlayerGunController>().IncreaseCounter();
+        if (es != null)
+            es.EnemyEliminated();
 
         Destroy(gameObject);
         GameObject.FindGameObjectWithTag("Player").GetComponent<FPSController>().IncreaseMoney(100);

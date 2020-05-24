@@ -8020,6 +8020,11 @@ PrefabInstance:
       propertyPath: isClimbing
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6630986309290257299, guid: 770274626b5a55541bc7ad8e0aa82746,
+        type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6631285140411702611, guid: 770274626b5a55541bc7ad8e0aa82746,
         type: 3}
       propertyPath: haveMeleeWeaponByDefault
