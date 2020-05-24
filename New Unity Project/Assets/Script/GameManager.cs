@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DarkTreeFPS;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -7,6 +8,9 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        var player = GameObject.FindGameObjectWithTag("Player").GetComponent<FPSController>();
+        player.IncreaseMoney(-player.GetMoney());
+
         Invoke("ReloadScene", delayTime);
     }
 
