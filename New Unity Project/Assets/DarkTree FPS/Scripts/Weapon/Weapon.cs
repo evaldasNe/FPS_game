@@ -987,13 +987,21 @@ namespace DarkTreeFPS
 
         public void AddAmmo(int amount)
         {
-            if (gameObject.activeSelf)
-            {
-                var item = new Item(ammoItemID, "ammo", "ammo", ItemType.ammo);
-                item.ammo = amount;
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            int price = 50;
 
-                inventory.GiveItem(item);
+            if (player.GetComponent<FPSController>().GetMoney() >= price)
+            {
+                if (gameObject.activeSelf)
+                {
+                    var item = new Item(ammoItemID, "ammo", "ammo", ItemType.ammo);
+                    item.ammo = amount;
+
+                    inventory.GiveItem(item);
+                    player.GetComponent<FPSController>().IncreaseMoney(-price);
+                }
             }
+            
         }
     }
 }
