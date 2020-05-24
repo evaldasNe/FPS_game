@@ -87,6 +87,14 @@ public class EnemySpawner : MonoBehaviour
                     npc1.es = this;
                     totalEnemiesSpawned++;
                 }
+                if (waveNumber > 10 && totalEnemiesSpawned < enemiesToEliminate)
+                {
+                    GameObject fatman = Instantiate(fatmanpreftab, randomPoint.position, Quaternion.identity);
+                    MonsterScript npc2 = fatman.GetComponent<MonsterScript>();
+                    npc2.target = player.transform;
+                    npc2.es = this;
+                    totalEnemiesSpawned++;
+                }
             }
         }
         if (player.health <= 0)
