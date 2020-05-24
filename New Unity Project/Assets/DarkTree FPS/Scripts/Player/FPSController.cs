@@ -2,8 +2,6 @@
 /// If you have any questions feel free to write me at email --- darktreedevelopment@gmail.com ---
 /// Thanks for purchasing my asset!
 
-using Boo.Lang;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
