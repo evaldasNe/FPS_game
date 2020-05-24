@@ -6266,6 +6266,21 @@ PrefabInstance:
       propertyPath: PauseMenu
       value: 27
       objectReference: {fileID: 0}
+    - target: {fileID: 4851925323872027578, guid: 770274626b5a55541bc7ad8e0aa82746,
+        type: 3}
+      propertyPath: Use
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851925323872027578, guid: 770274626b5a55541bc7ad8e0aa82746,
+        type: 3}
+      propertyPath: DropWeapon
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851925323872027578, guid: 770274626b5a55541bc7ad8e0aa82746,
+        type: 3}
+      propertyPath: Inventory
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5530369604288310807, guid: 770274626b5a55541bc7ad8e0aa82746,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -6445,6 +6460,11 @@ PrefabInstance:
         type: 3}
       propertyPath: iterations
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743780984289686420, guid: 770274626b5a55541bc7ad8e0aa82746,
+        type: 3}
+      propertyPath: m_Volume
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6745856987671994349, guid: 770274626b5a55541bc7ad8e0aa82746,
         type: 3}
