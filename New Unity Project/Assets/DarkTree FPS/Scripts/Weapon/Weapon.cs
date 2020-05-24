@@ -355,8 +355,9 @@ namespace DarkTreeFPS
         public void Fire()
         {
             var shop = GameObject.FindGameObjectWithTag("Shop");
+            var pause = GameObject.FindGameObjectWithTag("Pause");
  
-            if (weaponType != WeaponType.Melee && weaponType != WeaponType.Grenade && shop == null)
+            if (weaponType != WeaponType.Melee && weaponType != WeaponType.Grenade && shop == null && pause == null)
             {
                 if (Time.time > nextFireTime && !reloading && canShot && !controller.isClimbing) //Allow fire statement
                 {
