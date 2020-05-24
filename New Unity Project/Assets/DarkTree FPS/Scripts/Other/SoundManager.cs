@@ -7,6 +7,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip pickupSound;
     public AudioClip inventoryOpenSound;
     public AudioClip clickSound;
+    private float musicVolume = 1f;
 
     public AudioSource source;
 
@@ -28,6 +29,14 @@ public class SoundManager : MonoBehaviour
     public void Click()
     {
         source.PlayOneShot(clickSound);
+    }
+    public void SetVolume(float vol)
+    {
+        musicVolume = vol;
+    }
+    private void Update()
+    {
+        source.volume = musicVolume;
     }
 
 }
