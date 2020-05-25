@@ -16267,6 +16267,20 @@ PrefabInstance:
       propertyPath: Deathscreen
       value: 
       objectReference: {fileID: 1437205916}
+    - target: {fileID: 6631521817500256629, guid: 770274626b5a55541bc7ad8e0aa82746,
+        type: 3}
+      propertyPath: m_Text
+      value: 'Controls:
+
+        LMB - fire, RMB - aim
+
+        Q/E - Lean left/right.
+        Space - jump
+
+        Ctrl - crouch.
+
+        Press B to open shop'
+      objectReference: {fileID: 0}
     - target: {fileID: 6720271045585377670, guid: 770274626b5a55541bc7ad8e0aa82746,
         type: 3}
       propertyPath: m_IsActive
