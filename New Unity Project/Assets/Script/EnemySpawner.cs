@@ -109,7 +109,7 @@ public class EnemySpawner : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Box(new Rect(Screen.width / 2 - 50, 10, 100, 25), (enemiesToEliminate - enemiesEliminated).ToString()+"Enemy left");
+        GUI.Box(new Rect(Screen.width / 2 - 50, 10, 100, 25), (enemiesToEliminate - enemiesEliminated).ToString()+" Enemy left");
 
         if (waitingForWave)
         {

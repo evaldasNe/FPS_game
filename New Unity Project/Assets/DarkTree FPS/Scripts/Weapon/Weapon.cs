@@ -280,7 +280,7 @@ namespace DarkTreeFPS
             }
 
             var item = new Item(ammoItemID, "ammo", "ammo", ItemType.ammo);
-            item.ammo = 50;
+            item.ammo = 100;
 
             inventory.GiveItem(item);
         }
